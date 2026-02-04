@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: #ffe6ec;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        transition: background 0.8s ease;
+    }
+
+    /* Doodle after YES */
+    body.doodle {
+        background: url("doodle.png") no-repeat center center / cover;
+    }
+
+    .container {
+        background: rgba(255,255,255,0.9);
+        padding: 25px;
+        border-radius: 22px;
+        text-align: center;
+        width: 90%;
+        max-width: 340px;
+    }
+
+    h1 {
+        font-size: 26px;
+        color: #ff4d6d;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+
+    .btn-area {
+        position: relative;
+        height: 90px;
+    }
+
+    button {
+        padding: 13px 26px;
+        border: none;
+        border-radius: 30px;
+        font-size: 17px;
+        position: absolute;
+        top: 0;
+        cursor: pointer;
+    }
+
+    #yesBtn {
+        background: #ff4d6d;
+        color: white;
+        left: 15px;
+    }
+
+    #noBtn {
+        background: #ccc;
+        right: 15px;
+        transition: left 0.15s ease, top 0.15s ease;
+    }
+
+    /* FUN + BOLD MESSAGE FONT */
+    .message {
+        display: none;
+        font-size: 24px;
+        font-weight: 900;
+        color: #ff2f5e;
+        line-height: 1.4;
+        font-family: 'Trebuchet MS', 'Comic Sans MS', cursive;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Song (must be in same folder) -->
+<audio id="song" src="perfect.mp3"></audio>
+
+<div class="container">
+    <h1 id="question">Will you be my Valentine, Mittu? 💕</h1>
+
+    <div class="btn-area" id="area">
+        <button id="yesBtn">YES ❤️</button>
+        <button id="noBtn">NO 😤</button>
+    </div>
+
+    <div class="message" id="message">
+        REALLY???? 😍😍<br>
+        I thought you’d NEVER say YES 😌💖
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const area = document.getElementById("area");
+    const yesBtn = document.getElementById("yesBtn");
+    const question = document.getElementById("question");
+    const message = document.getElementById("message");
+    const song = document.getElementById("song");
+
+    function moveNo() {
+        const maxX = area.clientWidth - noBtn.offsetWidth;
+        const maxY = area.clientHeight - noBtn.offsetHeight;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+
+    // Runs away MORE (hover + tap)
+    noBtn.addEventListener("mouseenter", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
+
+    yesBtn.addEventListener("click", () => {
+        question.style.display = "none";
+        area.style.display = "none";
+        message.style.display = "block";
+
+        document.body.classList.add("doodle"); // show doodle
+        song.play(); // play music
+    });
+</script>
+
+</body>
+</html>
